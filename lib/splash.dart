@@ -34,7 +34,7 @@ class _SplashScreen extends State<SplashScreen> {
           children: const [
             Icon(
               Icons.lightbulb,
-              color: Colors.white,
+              color: Colors.black87,
               size: 72,
             ),
             SizedBox(
@@ -43,7 +43,7 @@ class _SplashScreen extends State<SplashScreen> {
             Text(
               'Bank of Ideas',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 24,
               ),
             )
