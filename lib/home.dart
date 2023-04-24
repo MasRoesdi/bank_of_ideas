@@ -11,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  List<bool> selectedCategories = List.generate(20, (index) => false);
+
   void get() async {}
 
   @override
@@ -27,18 +29,82 @@ class _HomeScreen extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(),
-            // Something like a categories selector in a horizontal scrollview
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            Container(
+              width: screenSize.width,
+              padding: const EdgeInsets.only(
+                  top: 24, right: 18, bottom: 12, left: 18),
+              decoration: BoxDecoration(
+                color: Colors.yellow[600],
+              ),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  //  Perhaps there will be a sort button, who knows
-                  // In here will be the categories
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.cloud_upload_sharp,
+                      color: Colors.black87,
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            // Something like a categories selector in a horizontal scrollview
+            Container(
+              margin: EdgeInsets.symmetric(
+                  vertical: 12, horizontal: screenSize.width * 0.025),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    //  Perhaps there will be a sort button, who knows
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Row(),
+                      ),
+                    ),
+                    // In here will be the categories
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:
+                          List.generate(selectedCategories.length, (index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 8),
+                          child: TextButton(
+                            style: const ButtonStyle(
+                              padding:
+                                  MaterialStatePropertyAll(EdgeInsets.zero),
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(48),
+                                  ),
+                                ),
+                              ),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                selectedCategories[index] =
+                                    !selectedCategories[index];
+                              });
+                            },
+                            child: CategoryButton(
+                              categoryColor: Colors.blue,
+                              categoryName: "Category1",
+                              isSelected: selectedCategories[index],
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Ideas list using custom widgets -> CardIdea

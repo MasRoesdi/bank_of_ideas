@@ -10,4 +10,9 @@ class TextProperties {
     color: Colors.black54,
     fontSize: 16,
   );
+
+  static const TextStyle small = TextStyle(
+    color: Colors.black54,
+    fontSize: 14,
+  );
 }
