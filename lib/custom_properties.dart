@@ -16,3 +16,8 @@ class TextProperties {
     fontSize: 14,
   );
 }
+
+class ColorProperties {
+  static Color? main = Colors.grey[100];
+  static Color? secondary = Colors.grey[200];
+}

@@ -1,3 +1,4 @@
+import 'package:bank_of_ideas/custom_properties.dart';
 import 'package:bank_of_ideas/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -21,100 +22,173 @@ class _HomeScreen extends State<HomeScreen> {
 
     return Scaffold(
       // Make sure not to make the background too bright
-      backgroundColor: Colors.grey[100],
+      backgroundColor: ColorProperties.main,
       floatingActionButton: FloatingActionButton(
         onPressed: get,
+        foregroundColor: Colors.black54,
+        backgroundColor: ColorProperties.main,
         child: const Icon(Icons.add),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: screenSize.width,
-              padding: const EdgeInsets.only(
-                  top: 24, right: 18, bottom: 12, left: 18),
-              decoration: BoxDecoration(
-                color: Colors.yellow[600],
-              ),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.cloud_upload_sharp,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: screenSize.width,
+            padding: const EdgeInsets.only(top: 24, bottom: 12),
+            margin: const EdgeInsets.only(bottom: 4),
+            decoration: BoxDecoration(
+              color: ColorProperties.secondary,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 4),
+                  blurRadius: 8,
+                ),
+              ],
             ),
-            // Something like a categories selector in a horizontal scrollview
-            Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: 12, horizontal: screenSize.width * 0.025),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //  Perhaps there will be a sort button, who knows
-                    SizedBox(
-                      child: TextButton(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Row(
+                    children: [
+                      IconButton(
                         onPressed: () {},
-                        child: Row(),
+                        icon: const Icon(
+                          Icons.cloud_download_rounded,
+                          color: Colors.black54,
+                          size: 32,
+                        ),
                       ),
-                    ),
-                    // In here will be the categories
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children:
-                          List.generate(selectedCategories.length, (index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          child: TextButton(
-                            style: const ButtonStyle(
-                              padding:
-                                  MaterialStatePropertyAll(EdgeInsets.zero),
-                              shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(48),
-                                  ),
-                                ),
-                              ),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                selectedCategories[index] =
-                                    !selectedCategories[index];
-                              });
-                            },
-                            child: CategoryButton(
-                              categoryColor: Colors.blue,
-                              categoryName: "Category1",
-                              isSelected: selectedCategories[index],
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.cloud_upload_rounded,
+                          color: Colors.black54,
+                          size: 32,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.settings,
+                          color: Colors.black54,
+                          size: 32,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Something like a categories selector in a horizontal scrollview
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 6),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //  Perhaps there will be a sort button, who knows
+                      Container(
+                        padding: const EdgeInsets.only(right: 4),
+                        decoration: BoxDecoration(
+                          color: ColorProperties.secondary,
+                          border: const Border(
+                            right: BorderSide(
+                              color: Colors.black54,
+                              width: 1,
                             ),
                           ),
-                        );
-                      }),
-                    ),
+                        ),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.sort_rounded,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                'Sort By',
+                                style: TextProperties.small,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      // In here will be the categories
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: List.generate(selectedCategories.length,
+                                (index) {
+                              return Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: TextButton(
+                                  style: const ButtonStyle(
+                                    padding: MaterialStatePropertyAll(
+                                        EdgeInsets.zero),
+                                    shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(256),
+                                        ),
+                                      ),
+                                    ),
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedCategories[index] =
+                                          !selectedCategories[index];
+                                    });
+                                  },
+                                  child: CategoryButton(
+                                    categoryColor: Colors.purple,
+                                    categoryName: "Category1",
+                                    isSelected: selectedCategories[index],
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Ideas list using custom widgets -> CardIdea
+          Expanded(
+            child: SingleChildScrollView(
+              child: SizedBox(
+                width: screenSize.width,
+                child: Column(
+                  children: [
+                    for (var i = 0; i < 10; i++)
+                      const CardIdea(
+                        title: "title",
+                        description: "description",
+                        categories: [1, 2, 3, 4],
+                      ),
                   ],
                 ),
               ),
             ),
-            // Ideas list using custom widgets -> CardIdea
-            const CardIdea(
-              title: "title",
-              description: "description",
-              categories: [1, 2, 3, 4],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

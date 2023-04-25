@@ -22,8 +22,17 @@ class CardIdea extends StatelessWidget {
         vertical: 12,
         horizontal: 18,
       ),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.yellow[400],
+        color: ColorProperties.main,
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            offset: Offset(0, 1),
+            blurRadius: 4,
+          )
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -34,9 +43,15 @@ class CardIdea extends StatelessWidget {
             '$title',
             style: TextProperties.h1,
           ),
+          const SizedBox(
+            height: 8,
+          ),
           Text(
             '$description',
             style: TextProperties.normal,
+          ),
+          const SizedBox(
+            height: 4,
           ),
           Text(
             '$categories',
@@ -48,8 +63,9 @@ class CardIdea extends StatelessWidget {
   }
 }
 
-// This widget is used for the HomeScreen's toggle buttons
-// The widget requires the color code and the name of said category
+// This widget is used for the HomeScreen's toggle buttons. The widget requires
+// the color code, name of said category, and the state to know whether or not
+// the button has been pressed.
 class CategoryButton extends StatelessWidget {
   final Color? categoryColor;
   final String? categoryName;
@@ -61,15 +77,22 @@ class CategoryButton extends StatelessWidget {
       required this.isSelected,
       super.key});
 
-  // This part of the code is still errornous, mainly because the r, g, and b
-  // values can exceed 255 (which may have unexpected effects).
-  // ------------------------------------------------------------------------
-  // TODO: IMPLEMENT ERROR HANDLING ON COLORS THAT MAY EXCEED 255 IN RGB VALUE
+  // Modifies the current color using the HSLColor class to modify the color's
+  // lightness/brightness. It is considerably easier to use HSL than RGB. Since
+  // using RGB means that you need to handle values that could go over 255.
   Color modifiedCategoryColor(Color currentColor) {
-    return currentColor
-        .withRed(currentColor.red + 14)
-        .withGreen(currentColor.green + 14)
-        .withBlue(currentColor.blue + 14);
+    HSLColor convertedColor = HSLColor.fromColor(currentColor);
+    double colorBrightness = convertedColor.lightness;
+
+    if (colorBrightness < 0.5) {
+      return convertedColor
+          .withLightness(convertedColor.lightness + 0.2)
+          .toColor();
+    } else {
+      return convertedColor
+          .withLightness(convertedColor.lightness - 0.2)
+          .toColor();
+    }
   }
 
   @override
@@ -78,12 +101,12 @@ class CategoryButton extends StatelessWidget {
       duration: const Duration(milliseconds: 150),
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
       decoration: BoxDecoration(
-        color: isSelected! ? categoryColor! : Colors.grey[100],
+        color: isSelected! ? categoryColor! : ColorProperties.secondary,
         border: Border.all(
           color: categoryColor!,
           width: 1,
         ),
-        borderRadius: BorderRadius.circular(48),
+        borderRadius: BorderRadius.circular(256),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -102,7 +125,14 @@ class CategoryButton extends StatelessWidget {
           ),
           Text(
             '$categoryName',
-            style: TextProperties.small,
+            style: TextStyle(
+              color: isSelected! &&
+                      HSLColor.fromColor(categoryColor!).lightness < 0.5
+                  ? Colors.grey[100]
+                  : Colors.black87,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),

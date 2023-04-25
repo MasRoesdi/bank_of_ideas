@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bank_of_ideas/custom_properties.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[600],
+      backgroundColor: ColorProperties.main,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.max,
