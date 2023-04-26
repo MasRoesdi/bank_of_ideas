@@ -1,4 +1,5 @@
 import 'package:bank_of_ideas/home.dart';
+import 'package:bank_of_ideas/settings.dart';
 import 'package:bank_of_ideas/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,7 +25,8 @@ class RootWidget extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/splash': (context) => const SplashScreen()
+        '/splash': (context) => const SplashScreen(),
+        '/settings': (context) => const SettingsScreen()
       },
       theme: ThemeData(
         textTheme: GoogleFonts.montserratTextTheme(),

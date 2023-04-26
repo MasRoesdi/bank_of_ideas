@@ -26,13 +26,7 @@ class CardIdea extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorProperties.main,
         borderRadius: BorderRadius.circular(4),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0, 1),
-            blurRadius: 4,
-          )
-        ],
+        boxShadow: BoxShadowProperties.cardShadow,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,

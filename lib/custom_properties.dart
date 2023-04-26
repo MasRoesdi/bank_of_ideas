@@ -21,3 +21,13 @@ class ColorProperties {
   static Color? main = Colors.grey[100];
   static Color? secondary = Colors.grey[200];
 }
+
+class BoxShadowProperties {
+  static List<BoxShadow> cardShadow = [
+    const BoxShadow(
+      color: Colors.black26,
+      offset: Offset(0, 1),
+      blurRadius: 4,
+    )
+  ];
+}
