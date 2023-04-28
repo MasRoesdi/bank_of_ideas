@@ -134,44 +134,61 @@ class CategoryButton extends StatelessWidget {
   }
 }
 
-// The commented class below is an attempt to create a custom ToggleButtons
-// that is made solely for the categories selector that is designed for
-// the HomeScreen. Due to the probable difficulty of making such widget,
-// the development for it has been stopped.
+class OnboardPage extends StatelessWidget {
+  final String? title;
+  final String? subtitle;
+  final String? imagePath;
 
-// class CategoryButtonGroup extends StatelessWidget {
-//   final List<CategoryButton>? buttons;
-//   final List<bool>? isSelected;
+  const OnboardPage(
+      {required this.title,
+      required this.subtitle,
+      required this.imagePath,
+      super.key});
 
-//   const CategoryButtonGroup(
-//       {required this.buttons, required this.isSelected, super.key});
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisSize: MainAxisSize.max,
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: List.generate(buttons!.length, (index) {
-//         return Container(
-//           margin: const EdgeInsets.symmetric(horizontal: 8),
-//           child: TextButton(
-//             style: const ButtonStyle(
-//               padding: MaterialStatePropertyAll(EdgeInsets.zero),
-//               shape: MaterialStatePropertyAll(
-//                 RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.all(
-//                     Radius.circular(48),
-//                   ),
-//                 ),
-//               ),
-//               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-//             ),
-//             onPressed: () {},
-//             child: buttons![index],
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
+    return Container(
+      width: screenSize.width,
+      height: screenSize.height * 0.65,
+      decoration: BoxDecoration(
+        color: ColorProperties.main,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SizedBox(
+              width: screenSize.width,
+              child: Image.asset(
+                imagePath!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Text(
+            '$title',
+            style: TextProperties.h1,
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              '$subtitle',
+              style: TextProperties.normal,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

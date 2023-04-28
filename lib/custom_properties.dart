@@ -15,6 +15,11 @@ class TextProperties {
     color: Colors.black54,
     fontSize: 14,
   );
+
+  static const TextStyle smallThick = TextStyle(
+    color: Colors.black87,
+    fontSize: 14,
+  );
 }
 
 class ColorProperties {
