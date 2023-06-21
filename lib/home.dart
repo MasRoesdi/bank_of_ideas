@@ -220,6 +220,7 @@ class _HomeScreen extends State<HomeScreen> {
                           title: "title",
                           description: "description",
                           categories: [1, 2, 3, 4],
+                          content: "nothing to see here",
                         ),
                     ],
                   ),

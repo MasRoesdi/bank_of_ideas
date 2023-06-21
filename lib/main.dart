@@ -1,4 +1,5 @@
 import 'package:bank_of_ideas/home.dart';
+import 'package:bank_of_ideas/ideas.dart';
 import 'package:bank_of_ideas/onboard.dart';
 import 'package:bank_of_ideas/settings.dart';
 import 'package:bank_of_ideas/splash.dart';
@@ -12,6 +13,9 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('ideas');
   await Hive.openBox('user_preferences');
+
+  // Use the code below to reset user preferences for showing the OnboardScreen
+  // await Hive.box('user_preferences').delete('onboarding_seen');
 
   runApp(const RootWidget());
 }

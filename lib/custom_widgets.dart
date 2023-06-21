@@ -1,57 +1,75 @@
 import 'package:bank_of_ideas/custom_properties.dart';
+import 'package:bank_of_ideas/ideas.dart';
 import 'package:flutter/material.dart';
 
 class CardIdea extends StatelessWidget {
   final String? title;
   final String? description;
   final List? categories;
+  final String? content;
 
   const CardIdea(
       {required this.title,
       required this.description,
       required this.categories,
+      required this.content,
       super.key});
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
-    return Container(
-      width: screenSize.width * 0.95,
-      padding: const EdgeInsets.symmetric(
-        vertical: 12,
-        horizontal: 18,
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: ColorProperties.main,
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: BoxShadowProperties.cardShadow,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '$title',
-            style: TextProperties.h1,
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => IdeaScreen(
+              title: title,
+              description: description,
+              categories: categories,
+              content: content,
+            ),
           ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            '$description',
-            style: TextProperties.normal,
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            '$categories',
-            style: TextProperties.normal,
-          ),
-        ],
+        );
+      },
+      child: Container(
+        width: screenSize.width * 0.95,
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 18,
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: ColorProperties.main,
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: BoxShadowProperties.cardShadow,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$title',
+              style: TextProperties.h1,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              '$description',
+              style: TextProperties.normal,
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Text(
+              '$categories',
+              style: TextProperties.normal,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:bank_of_ideas/custom_properties.dart';
 import 'package:bank_of_ideas/custom_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
@@ -46,6 +47,15 @@ class _OnboardScreen extends State<OnboardScreen> {
   ];
 
   int currentPage = 0;
+
+  void finishOnboard() async {
+    var box = Hive.box('user_preferences');
+    await box.put('onboarding_seen', true);
+
+    if (mounted) {
+      Navigator.pushNamed(context, '/');
+    }
+  }
 
   @override
   void initState() {
@@ -148,7 +158,7 @@ class _OnboardScreen extends State<OnboardScreen> {
                       currentPage == onboardingPages.length - 1
                           ? TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/');
+                                finishOnboard();
                               },
                               child: const Text(
                                 'finish',

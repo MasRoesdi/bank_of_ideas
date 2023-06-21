@@ -36,3 +36,10 @@ class BoxShadowProperties {
     )
   ];
 }
+
+class InputDecorationProperties {
+  static InputDecoration clear = const InputDecoration(
+    border: InputBorder.none,
+    contentPadding: EdgeInsets.zero,
+  );
+}

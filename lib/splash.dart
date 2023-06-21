@@ -17,20 +17,20 @@ class _SplashScreen extends State<SplashScreen> {
     super.initState();
 
     var box = Hive.box('user_preferences');
-    bool? isOnboardingSeen = box.get('onboarding_seen');
+    bool isOnboardingSeen = box.get('onboarding_seen', defaultValue: false);
 
-    if (isOnboardingSeen == null) {
+    if (isOnboardingSeen) {
       Timer(
         const Duration(milliseconds: 2500),
         () {
-          Navigator.pushReplacementNamed(context, '/onboard');
+          Navigator.pushReplacementNamed(context, '/');
         },
       );
     } else {
       Timer(
         const Duration(milliseconds: 2500),
         () {
-          Navigator.pushReplacementNamed(context, '/');
+          Navigator.pushReplacementNamed(context, '/onboard');
         },
       );
     }
