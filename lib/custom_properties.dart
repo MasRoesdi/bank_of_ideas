@@ -6,6 +6,11 @@ class TextProperties {
     fontSize: 24,
   );
 
+  static const TextStyle h2 = TextStyle(
+    color: Colors.black54,
+    fontSize: 20,
+  );
+
   static const TextStyle normal = TextStyle(
     color: Colors.black54,
     fontSize: 16,
@@ -38,8 +43,19 @@ class BoxShadowProperties {
 }
 
 class InputDecorationProperties {
-  static InputDecoration clear = const InputDecoration(
-    border: InputBorder.none,
-    contentPadding: EdgeInsets.zero,
-  );
+  static InputDecoration clear(String hint) {
+    return InputDecoration(
+      hintText: hint,
+      border: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.black38,
+        ),
+      ),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.black54,
+        ),
+      ),
+    );
+  }
 }

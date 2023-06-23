@@ -1,5 +1,6 @@
 import 'package:bank_of_ideas/custom_properties.dart';
 import 'package:bank_of_ideas/custom_widgets.dart';
+import 'package:bank_of_ideas/ideas.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,6 +18,46 @@ class _HomeScreen extends State<HomeScreen> {
 
   void get() async {}
 
+  void showChoiceDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('Add a new...'),
+          titleTextStyle: TextProperties.h2,
+          children: [
+            ListTile(
+              title: const Text(
+                'Category',
+                style: TextProperties.normal,
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text(
+                'Idea',
+                style: TextProperties.normal,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const IdeaScreen(
+                        title: "",
+                        description: "",
+                        categories: [1],
+                        content: ""),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -26,7 +67,7 @@ class _HomeScreen extends State<HomeScreen> {
       key: scaffoldKey,
       backgroundColor: ColorProperties.main,
       floatingActionButton: FloatingActionButton(
-        onPressed: get,
+        onPressed: showChoiceDialog,
         foregroundColor: Colors.black54,
         backgroundColor: ColorProperties.main,
         child: const Icon(Icons.add),
@@ -166,39 +207,22 @@ class _HomeScreen extends State<HomeScreen> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: List.generate(selectedCategories.length,
-                                  (index) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: TextButton(
-                                    style: const ButtonStyle(
-                                      padding: MaterialStatePropertyAll(
-                                          EdgeInsets.zero),
-                                      shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(256),
-                                          ),
-                                        ),
-                                      ),
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    onPressed: () {
+                              children: List.generate(
+                                selectedCategories.length,
+                                (index) {
+                                  return CategoryToggleButton(
+                                    categoryColor: Colors.purple,
+                                    categoryName: "Category1",
+                                    buttonPressed: () {
                                       setState(() {
                                         selectedCategories[index] =
                                             !selectedCategories[index];
                                       });
                                     },
-                                    child: CategoryButton(
-                                      categoryColor: Colors.purple,
-                                      categoryName: "Category1",
-                                      isSelected: selectedCategories[index],
-                                    ),
-                                  ),
-                                );
-                              }),
+                                    isSelected: selectedCategories[index],
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
