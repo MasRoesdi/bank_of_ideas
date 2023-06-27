@@ -26,19 +26,19 @@ class _HomeScreen extends State<HomeScreen> {
           title: const Text('Add a new...'),
           titleTextStyle: TextProperties.h2,
           children: [
-            ListTile(
-              title: const Text(
+            SimpleDialogOption(
+              child: const Text(
                 'Category',
                 style: TextProperties.normal,
               ),
-              onTap: () {},
+              onPressed: () {},
             ),
-            ListTile(
-              title: const Text(
+            SimpleDialogOption(
+              child: const Text(
                 'Idea',
                 style: TextProperties.normal,
               ),
-              onTap: () {
+              onPressed: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,

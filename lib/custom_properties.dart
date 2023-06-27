@@ -16,6 +16,11 @@ class TextProperties {
     fontSize: 16,
   );
 
+  static TextStyle redNormal = TextStyle(
+    color: Colors.red[600],
+    fontSize: 16,
+  );
+
   static const TextStyle small = TextStyle(
     color: Colors.black54,
     fontSize: 14,

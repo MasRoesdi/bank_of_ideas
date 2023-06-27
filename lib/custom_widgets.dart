@@ -234,15 +234,19 @@ class OnboardPage extends StatelessWidget {
   }
 }
 
+// Another type of button for categories
+// This one is for the ideas page
 class CategoryButton extends StatelessWidget {
   final VoidCallback buttonPressed;
   final Color categoryColor;
   final String categoryName;
+  final bool isAddCategory;
 
   const CategoryButton(
       {required this.buttonPressed,
       required this.categoryColor,
       required this.categoryName,
+      this.isAddCategory = false,
       super.key});
 
   @override
@@ -265,21 +269,35 @@ class CategoryButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: categoryColor,
           borderRadius: BorderRadius.circular(256),
+          border: Border.all(
+            color: isAddCategory ? Colors.black54 : categoryColor,
+            width: 1,
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 12,
-              height: 12,
-              margin: const EdgeInsets.only(right: 4),
-              decoration: BoxDecoration(
-                color: ColorProcessor.modifiedCategoryColor(categoryColor),
-                shape: BoxShape.circle,
-              ),
-            ),
+            isAddCategory
+                ? Container(
+                    margin: const EdgeInsets.only(right: 4),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.black54,
+                      size: 12,
+                    ),
+                  )
+                : Container(
+                    width: 12,
+                    height: 12,
+                    margin: const EdgeInsets.only(right: 4),
+                    decoration: BoxDecoration(
+                      color:
+                          ColorProcessor.modifiedCategoryColor(categoryColor),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
             Text(
               categoryName,
               style: TextStyle(
