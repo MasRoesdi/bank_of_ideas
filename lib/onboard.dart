@@ -53,7 +53,7 @@ class _OnboardScreen extends State<OnboardScreen> {
     await box.put('onboarding_seen', true);
 
     if (mounted) {
-      Navigator.pushNamed(context, '/');
+      Navigator.pushReplacementNamed(context, '/');
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:bank_of_ideas/home.dart';
+import 'package:bank_of_ideas/homeScaffold.dart';
 import 'package:bank_of_ideas/ideas.dart';
 import 'package:bank_of_ideas/onboard.dart';
 import 'package:bank_of_ideas/settings.dart';
@@ -30,7 +31,7 @@ class RootWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/': (context) => const HomeScaffold(),
         '/splash': (context) => const SplashScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/onboard': (context) => const OnboardScreen(),

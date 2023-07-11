@@ -34,7 +34,7 @@ class CardIdea extends StatelessWidget {
         );
       },
       child: Container(
-        width: screenSize.width * 0.95,
+        width: screenSize.width,
         padding: const EdgeInsets.symmetric(
           vertical: 12,
           horizontal: 18,
